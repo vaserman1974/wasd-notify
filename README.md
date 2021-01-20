@@ -1,1 +1,1 @@
-# wasd-notify
+# WASD.TV - Notifications
