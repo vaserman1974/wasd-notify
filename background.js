@@ -4,7 +4,7 @@
 # 
 --------------------------------------------------------------*/
 
-var subscriptions = {},
+var followed = {},
     notified = {},
     badge_counter = 0;
 
@@ -34,13 +34,12 @@ function updateBadge() {
 }
 
 async function liveCheck() {
-    for (var key in subscriptions) {
-        if (subscriptions[key] === true) {
+    for (var key in followed) {
+        if (followed[key].followed === true) {
             var response = await (await fetch('https://wasd.tv/api/v2/channels/nicknames/' + key, {
                     credentials: 'omit'
                 })).json(),
                 notif = notified[key] || {};
-
 
             if (
                 response.result.channel_is_live === true &&
@@ -54,13 +53,6 @@ async function liveCheck() {
                     time: new Date().getTime()
                 };
 
-                /*chrome.notifications.create({
-                    type: 'basic',
-                    iconUrl: 'icons/128.png',
-                    title: 'WASD.TV',
-                    message: 'Канал «' + response.result.channel_name + '»‎ начал трансляцию.'
-                }, function() {});*/
-
                 badge_counter++;
 
                 updateBadge();
@@ -70,17 +62,19 @@ async function liveCheck() {
 }
 
 chrome.storage.local.get(function(items) {
-    if (items.hasOwnProperty('subscriptions')) {
-        subscriptions = items.subscriptions;
+    if (items.hasOwnProperty('followed')) {
+        followed = items.followed;
     }
+
+    liveCheck();
 
     setInterval(liveCheck, 60000);
 });
 
 chrome.storage.onChanged.addListener(function(changes) {
     for (var key in changes) {
-        if (key === 'subscriptions') {
-            subscriptions = changes[key].newValue;
+        if (key === 'followed') {
+            followed = changes[key].newValue;
         }
     }
 });

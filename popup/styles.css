@@ -1,9 +1,22 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Document
+# Header
+# Main
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# DOCUMENT
+--------------------------------------------------------------*/
+
 html,
 body
 {
     font: 400 16px sans-serif;
 
     display: flex;
+    overflow: hidden;
     flex-direction: column;
 
     width: 320px;
@@ -14,8 +27,25 @@ body
     background: #141820;
 }
 
+::-webkit-scrollbar
+{
+    background-color: rgba(255,255,255,.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: rgba(255,255,255,.1);
+}
+
+
+/*--------------------------------------------------------------
+# HEADER
+--------------------------------------------------------------*/
+
 header
 {
+    z-index: 1;
+
     display: flex;
 
     box-sizing: border-box;
@@ -23,25 +53,21 @@ header
     padding: 0 16px;
 
     background: #1a202c;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0,.08);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .08);
 
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
-header img
+header a:not(:first-child)
 {
-    height: 24px;
-}
-
-.wasd-header-text-link
-{
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
 
     display: inline-flex;
 
     height: 32px;
+    margin: 2px 4px 0;
     padding: 0 8px;
 
     text-decoration: none;
@@ -53,54 +79,104 @@ header img
     align-items: center;
 }
 
-.wasd-header-text-link:focus,
-.wasd-header-text-link:hover
+header a:not(:first-child):focus,
+header a:not(:first-child):hover
 {
     color: rgba(255, 255, 255, .64);
     background-color: rgba(0,0,0,.08);
 }
 
+header img
+{
+    height: 20px;
+}
+
+
+/*--------------------------------------------------------------
+# MAIN
+--------------------------------------------------------------*/
+
 main
 {
     display: flex;
+    overflow-y: scroll;
     flex-direction: column;
 
-    margin: 8px 0 0;
+    padding: 0 16px;
+
+    flex: 1;
 }
 
-.wasd-item
+main a
+{
+    text-decoration: none;
+
+    color: inherit;
+}
+
+h1
+{
+    font-size: 14px;
+    line-height: 1.17;
+
+    margin: 8px 0;
+
+    color: #fff;
+}
+
+.search-field
+{
+    font-size: 14px;
+
+    position: relative;
+    z-index: 1;
+
+    box-sizing: border-box;
+    min-height: 32px;
+    margin: 16px 0;
+    padding: 0 8px;
+
+    color: #fff;
+    border: solid 1px rgba(255,255,255,.48);
+    border-radius: 4px;
+    outline: 0;
+    background-color: transparent;
+}
+
+.list-item
 {
     position: relative;
 
     display: flex;
 
     margin: 2px 0;
-    padding: 8px 16px;
+    padding: 8px 0;
 
-    cursor: pointer;
+    cursor: default;
 
     justify-content: flex-start;
     align-items: center;
 }
 
-.wasd-item:focus,
-.wasd-item:hover
+.list-item:hover
 {
     color: rgba(255, 255, 255, .64);
     background-color: rgba(0,0,0,.08);
 }
 
-.wasd-item__img
+.list-item__image
 {
     overflow: hidden;
 
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
 
     border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.wasd-item__title
+.list-item__name
 {
     font-weight: 700;
 
@@ -110,19 +186,32 @@ main
     margin: 0 0 0 16px;
 }
 
-.wasd-item__status--true
+.list-item__notify
 {
-    font-size: 13px;
-    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
 
-    display: inline-flex;
+    cursor: pointer;
+    transition: 200ms;
 
-    padding: 2px 8px;
+    color: inherit;
+    border: none;
+    outline: none;
+    background: transparent;
+}
 
-    color: #fff;
-    border-radius: 6px;
-    background: #f00;
+.list-item__notify:hover
+{
+    transform: scale(1.2);
+}
 
-    justify-content: center;
-    align-items: center;
+.list-item__notify--followed
+{
+    color: #f00;
+}
+
+.list-item__notify svg
+{
+    width: 100%;
 }
