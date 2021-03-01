@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/victor-savinov/wasd-notify">
-        <img src="https://github.com/victor-savinov/previews/blob/main/wasd-notify/screenshot-01.png">
+        <img src="https://github.com/victor-savinov/previews/blob/master/wasd-notify/screenshot-01.png">
     </a>
 </p>
 
