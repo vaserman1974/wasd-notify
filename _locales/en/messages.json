@@ -1,0 +1,26 @@
+{
+	"description": {
+		"message": "The extension will allow you to receive notifications from WASD.TV"
+	},
+	"games": {
+		"message": "Games"
+	},
+	"h": {
+		"message": "h"
+	},
+	"m": {
+		"message": "m"
+	},
+	"name": {
+		"message": "WASD.TV - Notifications"
+	},
+	"noResultsFound": {
+		"message": "No results found"
+	},
+	"search": {
+		"message": "Search"
+	},
+	"youAreNotFollowingAnyChannelsYetTryUsingTheSearch": {
+		"message": "You are not following any channels yet, try using the search"
+	}
+}

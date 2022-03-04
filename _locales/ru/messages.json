@@ -1,0 +1,26 @@
+{
+	"description": {
+		"message": "Это расширение позволит вам настроить получение уведомлений от WASD.TV"
+	},
+	"games": {
+		"message": "Игры"
+	},
+	"h": {
+		"message": "ч."
+	},
+	"m": {
+		"message": "м."
+	},
+	"name": {
+		"message": "WASD.TV - Уведомления"
+	},
+	"noResultsFound": {
+		"message": "Ничего не найдено"
+	},
+	"search": {
+		"message": "Найти на сайте"
+	},
+	"youAreNotFollowingAnyChannelsYetTryUsingTheSearch": {
+		"message": "Мы ничего не нашли по этому запросу, попробуй позже или измени искомое слово"
+	}
+}
