@@ -5,8 +5,7 @@
 --------------------------------------------------------------*/
 
 var followed = {},
-    notified = {},
-    badge_counter = 0;
+    notified = {};
 
 /*--------------------------------------------------------------
 # 
@@ -20,20 +19,18 @@ chrome.runtime.onMessage.addListener(async function(message, sender, sendRespons
             title: 'WASD.TV',
             message: message.message
         }, function() {});
-    } else if (message.action === 'reset-badge') {
-        badge_counter = 0;
-
-        updateBadge();
     }
 });
 
-function updateBadge() {
+function updateBadge(count) {
     chrome.browserAction.setBadgeText({
-        text: badge_counter > 0 ? String(badge_counter) : ''
+        text: count === 0 ? '' : String(count)
     });
 }
 
 async function liveCheck() {
+    var badge_counter = 0;
+
     for (var key in followed) {
         if (followed[key].followed === true) {
             var response = await (await fetch('https://wasd.tv/api/v2/channels/nicknames/' + key, {
@@ -41,24 +38,20 @@ async function liveCheck() {
                 })).json(),
                 notif = notified[key] || {};
 
-            if (
-                response.result.channel_is_live === true &&
-                (
-                    response.result.channel_is_live !== notif.is_live ||
-                    new Date().getTime() - notif.time >= 8.64e+7
-                )
-            ) {
-                notified[key] = {
-                    is_live: response.result.channel_is_live,
-                    time: new Date().getTime()
-                };
-
+            if (response.result.channel_is_live === true) {
                 badge_counter++;
 
-                updateBadge();
+                if (response.result.channel_is_live !== notif.is_live || new Date().getTime() - notif.time >= 8.64e+7) {
+                    notified[key] = {
+                        is_live: response.result.channel_is_live,
+                        time: new Date().getTime()
+                    };
+                }
             }
         }
     }
+
+    updateBadge(badge_counter);
 }
 
 chrome.storage.local.get(function(items) {
@@ -77,4 +70,6 @@ chrome.storage.onChanged.addListener(function(changes) {
             followed = changes[key].newValue;
         }
     }
+
+    liveCheck();
 });
