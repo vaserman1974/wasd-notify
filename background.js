@@ -11,14 +11,14 @@ var followed = {},
 # 
 --------------------------------------------------------------*/
 
-chrome.runtime.onMessage.addListener(async function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
     if (message.action === 'notification') {
         chrome.notifications.create({
             type: 'basic',
             iconUrl: 'icons/128.png',
             title: 'WASD.TV',
             message: message.message
-        }, function() {});
+        }, function () {});
     }
 });
 
@@ -54,7 +54,7 @@ async function liveCheck() {
     updateBadge(badge_counter);
 }
 
-chrome.storage.local.get(function(items) {
+chrome.storage.local.get(function (items) {
     if (items.hasOwnProperty('followed')) {
         followed = items.followed;
     }
@@ -64,7 +64,7 @@ chrome.storage.local.get(function(items) {
     setInterval(liveCheck, 60000);
 });
 
-chrome.storage.onChanged.addListener(function(changes) {
+chrome.storage.onChanged.addListener(function (changes) {
     for (var key in changes) {
         if (key === 'followed') {
             followed = changes[key].newValue;

@@ -213,12 +213,17 @@ extension.channels.render = async function (channelName, imageUrl) {
         button.className += ' list-item__button--active';
     }
 
+    item.channelName = channelName;
     avatar.style.backgroundImage = 'url(' + imageUrl + ')';
     name.textContent = channelName;
     button.dataset.name = channelName;
     button.dataset.image = imageUrl;
 
-    button.addEventListener('click', function () {
+    item.addEventListener('click', function () {
+        open('https://wasd.tv/' + this.channelName, '_blank');
+    });
+
+    button.addEventListener('click', function (event) {
         var followed = extension.channels.followed,
             name = this.dataset.name;
 
@@ -234,7 +239,12 @@ extension.channels.render = async function (channelName, imageUrl) {
         followed[name].image = this.dataset.image;
 
         extension.storage.set('followed', followed);
-    });
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        return false;
+    }, true);
 
     item.appendChild(avatar);
     info.appendChild(name);
