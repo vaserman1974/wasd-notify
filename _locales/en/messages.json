@@ -17,6 +17,15 @@
 	"noResultsFound": {
 		"message": "No results found"
 	},
+	"notNow": {
+		"message": "Not now"
+	},
+	"pleaseRateTheExtension": {
+		"message": "Please rate the extension."
+	},
+	"rate": {
+		"message": "Rate"
+	},
 	"search": {
 		"message": "Search"
 	},

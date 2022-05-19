@@ -41,7 +41,7 @@ extension.render = function (skeleton, container) {
     }
 
     if (skeleton.text) {
-        element.textContent = skeleton.text;
+        element.textContent = chrome.i18n.getMessage(skeleton.text) || skeleton.text;
     }
 
     container.appendChild(element);
@@ -330,6 +330,56 @@ extension.search.oninput();
 extension.storage.import(function (items) {
     if (items.hasOwnProperty('followed')) {
         extension.channels.followed = items.followed;
+    }
+
+    if (items.rateUs !== true) {
+        var modal = extension.render({
+                component: 'div',
+                class: 'modal'
+            }, document.body),
+            scrim = extension.render({
+                component: 'div',
+                class: 'modal__scrim'
+            }, modal),
+            surface = extension.render({
+                component: 'div',
+                class: 'modal__surface'
+            }, modal);
+
+        scrim.addEventListener('click', function () {
+            var component = this.parentNode;
+
+            component.classList.add('modal--closing');
+
+            setTimeout(function () {
+                component.remove();
+            }, 140);
+        });
+
+        extension.render({
+            component: 'h1',
+            text: 'pleaseRateTheExtension'
+        }, surface);
+
+        extension.render({
+            component: 'button',
+            text: 'later'
+        }, surface).addEventListener('click', function () {
+            extension.storage.set('rateUs', true);
+
+            this.parentNode.parentNode.firstChild.click();
+        });
+
+        extension.render({
+            component: 'button',
+            text: 'rate'
+        }, surface).addEventListener('click', function () {
+            extension.storage.set('rateUs', true);
+
+            window.open('https://chrome.google.com/webstore/detail/wasdtv-%D1%83%D0%B2%D0%B5%D0%B4%D0%BE%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F/ipeemmihcaliedfhcomcclimhgaiiflp/reviews', '_blank');
+
+            this.parentNode.parentNode.firstChild.click();
+        });
     }
 
     extension.channels.getAll();

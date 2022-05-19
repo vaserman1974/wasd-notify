@@ -17,6 +17,15 @@
 	"noResultsFound": {
 		"message": "Ничего не найдено"
 	},
+	"notNow": {
+		"message": "Позже"
+	},
+	"pleaseRateTheExtension": {
+		"message": "Пожалуйста, оцените расширение."
+	},
+	"rate": {
+		"message": "Оценить"
+	},
 	"search": {
 		"message": "Найти на сайте"
 	},
