@@ -29,6 +29,9 @@
 	"search": {
 		"message": "Найти на сайте"
 	},
+	"subscriptions": {
+		"message": "Подписки"
+	},
 	"youAreNotFollowingAnyChannelsYetTryUsingTheSearch": {
 		"message": "Мы ничего не нашли по этому запросу, попробуй позже или измени искомое слово"
 	}

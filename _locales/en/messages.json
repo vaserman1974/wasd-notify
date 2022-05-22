@@ -29,6 +29,9 @@
 	"search": {
 		"message": "Search"
 	},
+	"subscriptions": {
+		"message": "Subscriptions"
+	},
 	"youAreNotFollowingAnyChannelsYetTryUsingTheSearch": {
 		"message": "You are not following any channels yet, try using the search"
 	}
